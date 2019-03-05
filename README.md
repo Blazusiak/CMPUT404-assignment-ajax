@@ -10,6 +10,12 @@ Make a shared state AJAX drawing program
 Contributors / Licensing
 ========================
 
+Collaborators
+
+Resources
+
+* [Rendering Pages in Flask](http://flask.pocoo.org/snippets/126/)
+
 Generally everything is LICENSE'D under the Apache 2 license by Abram Hindle.
 
 
