@@ -43,17 +43,24 @@ function sendJSONFetchRequest(url, objects) {
         // Since fetch returns the object, we can directly update world.
         world = data;
         // drawNextFrame();
-        // POST to a URL
-        // set the mimetype and the accept headers!
-        // Remember to use application/json !
-        return fetch(url, {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(objects),
-        })
+    })
+    .catch(function (err) {
+        console.log(err);
+    });
+
+    // POST to a URL
+    // set the mimetype and the accept headers!
+    // Remember to use application/json !
+    fetch(url, {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(objects),
+    })
+    .then(function (response) {
+        console.log(response.json());
     })
     .catch(function (err) {
         console.log(err);

@@ -17,6 +17,7 @@ Resources
 * [XMLHttpRequest vs Fetch](https://medium.com/beginners-guide-to-mobile-web-development/the-fetch-api-2c962591f5c)
 * [Fetch Within a Fetch](https://stackoverflow.com/questions/40981040/using-a-fetch-inside-another-fetch-in-javascript)
 * [Iterating over a Dictionary](https://stackoverflow.com/questions/3294889/iterating-over-dictionaries-using-for-loops)
+* [Post using Fetch](https://stackoverflow.com/questions/29775797/fetch-post-json-data)
 
 Generally everything is LICENSE'D under the Apache 2 license by Abram Hindle.
 
