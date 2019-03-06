@@ -31,25 +31,33 @@ var context = canvas.getContext("2d");
 var W = canvas.width  = window.innerWidth-6;
 var H = canvas.height = window.innerHeight-50;
 
-
-function sendJSONXMLHTTPRequest(url, objects, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState==4) {
-            try {
-                if (xhr.status==200) {
-                    //XXX: parse some JSON from the request!
-                    //XXX: Pass the data to the callback!
-                }
-            } 
-            catch(e) {
-                alert('Error: ' + e.name);
-            }
-        }
-    };
-    //XXX: POST to a URL
-    //XXX: set the mimetype and the accept headers!
-    // Remember to use application/json !
+// Changed to use Fetch API
+// Callback will no longer be needed
+function sendJSONFetchRequest(url, objects) {
+    fetch(url)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        // No longer need to parse some JSON from the request!
+        // Since fetch returns the object, we can directly update world.
+        console.log(data);
+        world = data;
+        // POST to a URL
+        // set the mimetype and the accept headers!
+        // Remember to use application/json !
+        return fetch(url, {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        })
+    })
+    .catch(function (err) {
+        console.log(err);
+    });
 }
 
 
@@ -137,7 +145,8 @@ function getPosition(e) {
 function addEntity(entity, data) {
     world[entity] = data;
     drawNextFrame(); // (but should we?)
-    //XXX: Send a XHTML Request that updates the entity you just  modified!
+    // Send a Fetch Request that updates the entity you just modified!
+    sendJSONFetchRequest('/entity/' + entity, data, null);
 
 }
 
@@ -261,8 +270,9 @@ mouse.mousedraggers.push(function(x,y,clicked,e) {
 
 
 function update() {
-    //XXX: TODO Get the world from the webservice using a XMLHTTPRequest
+    // Get world from the webservice using a Fetch Request
     drawFrame();
+    //sendJSONFetchRequest('/world', null);
 }
 
 // 30 frames per second
