@@ -35,23 +35,20 @@ var H = canvas.height = window.innerHeight-50;
 // Callback will no longer be needed
 function sendJSONGETFetchRequest(url) {
     fetch(url)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        // No longer need to parse some JSON from the request!
-        // Since fetch returns the object, we can directly update world.
-        world = data;
+    .then(response => response.json())
+    // No longer need to parse some JSON from the request!
+    // Since fetch returns the object, we can directly update world.
+    // Draw the next frame to ensure syncing
+    .then(jsonResponse => {
+        world = jsonResponse;
         drawNextFrame();
     })
-    .catch(function (err) {
-        console.log(err);
-    });
+    .catch(error => console.error("Error:", error));
 }
 
-    // POST to a URL
-    // set the mimetype and the accept headers!
-    // Remember to use application/json !
+// POST to a URL
+// set the mimetype and the accept headers!
+// Remember to use application/json !
 function sendJSONPOSTFetchRequest(url, objects) {
     fetch(url, {
         method: "POST",
@@ -61,12 +58,9 @@ function sendJSONPOSTFetchRequest(url, objects) {
         },
         body: JSON.stringify(objects),
     })
-    .then(function (response) {
-        console.log(response.json());
-    })
-    .catch(function (err) {
-        console.log(err);
-    });
+    .then(response => response.json())
+    .then(jsonResponse => console.log("Success:", JSON.stringify(jsonResponse)))
+    .catch(error => console.error("Error:", error));
 }
 
 
