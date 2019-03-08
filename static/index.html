@@ -260,18 +260,19 @@ mouse = (function() {
 
 // Add the application specific mouse listeners!
 // Made prettier by using different colors and radii
+// https://saruwakakun.com/en/material-color
 mouse.mousedowners.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'#ffffff',
+    addEntityWithoutName({'x':x,'y':y,'colour':'#673AB7',
                           'radius':10});
 });
 
 mouse.mouseuppers.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'#ffffff',
+    addEntityWithoutName({'x':x,'y':y,'colour':'#9575CD',
                           'radius':10});
 });
 
 mouse.mousedraggers.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'#ffffff',
+    addEntityWithoutName({'x':x,'y':y,'colour':'#2196F3',
                           'radius':10});
 });
 
